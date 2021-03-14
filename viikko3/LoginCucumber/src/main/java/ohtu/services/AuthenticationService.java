@@ -33,6 +33,8 @@ public class AuthenticationService {
             return false;
         }
 
+     
+
         userDao.add(new User(username, password));
 
         return true;
@@ -40,7 +42,27 @@ public class AuthenticationService {
 
     private boolean invalid(String username, String password) {
         // validity check of username and password
+        if (username.length() < 3) {
+            return true;
+        }
 
+        if (password.length() < 8 ) {
+            return true;
+        }
+        // Joo, mutkat vähän suorina tässä.
+        if (!(password.contains("@") || password.contains("#") 
+            || password.contains("!") || password.contains("~") 
+            || password.contains("$") || password.contains("%") 
+            || password.contains("^") || password.contains("&") 
+            || password.contains("*") || password.contains("(") 
+            || password.contains(")") || password.contains("-") 
+            || password.contains("+") || password.contains("/") 
+            || password.contains(":") || password.contains(".") 
+            || password.contains(", ") || password.contains("<") 
+            || password.contains(">") || password.contains("?") 
+            || password.contains("|") || password.contains("1"))) { 
+            return true;
+        }
         return false;
     }
 }
